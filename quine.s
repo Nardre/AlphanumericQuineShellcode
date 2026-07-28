@@ -25,6 +25,7 @@ quine:
         push    eax
         pop     edx             ; Set EAX = 0, EDX = 0
 
+        aaa
         inc ecx
         dec ecx                 ; Padding
 
@@ -37,18 +38,17 @@ quine:
 
         ; --- sys_write (fd=STDOUT, buf=quine, count=quine_size) ---
         pop     ecx             ; Load quine argv
+        inc     edx
         push    edx
         pop     eax
-        inc     eax
-        inc     eax
-        inc     eax
-        inc     eax
+        inc     edx
+        inc     edx
         inc     edx
 
-        push    eax             ; pusha EAX (sys_write)
+        push    edx             ; pusha EAX (sys_write)
         push    ecx             ; pusha ECX (quine argv)
         push    len             ; pusha EDX (quine size)
-        push    edx             ; pusha EBX (STDOUT)
+        push    eax             ; pusha EBX (STDOUT)
         push    esp             ; pusha ESP
         push    ebp             ; pusha EBP
         push    esi             ; pusha ESI
